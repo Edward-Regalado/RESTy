@@ -35,8 +35,10 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
+        <span className='home-span'>
+          <h2>Request Method: {this.state.requestParams.method}</h2>
+          <h2>URL: {this.state.requestParams.url}</h2>
+        </span>
         <Form handleApiCall={this.callApi} />
         <Results data={this.state.data} />
         <Footer />
