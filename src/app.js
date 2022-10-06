@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './app.scss';
 
@@ -9,42 +9,36 @@ import Footer from './components/Footer';
 import Form from './components/Form';
 import Results from './components/Results';
 
-class App extends React.Component {
+function App(){
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-    };
-  }
+const [data, setData] = useState(null);
+const [requestParams, setRequestParams] = useState({});
 
-  callApi = (requestParams) => {
+ const callApi = (requestParams) => {
     // mock output
-    const data = {
+    const payload = {
       count: 2,
       results: [
         {name: 'fake thing 1', url: 'http://fakethings.com/1'},
         {name: 'fake thing 2', url: 'http://fakethings.com/2'},
       ],
     };
-    this.setState({data, requestParams});
+    setData(payload);
+    setRequestParams(requestParams);
   }
 
-  render() {
-    return (
-      <>
-        <Header />
-        <span className='home-span'>
-          <h2>Request Method: {this.state.requestParams.method}</h2>
-          <h2>URL: {this.state.requestParams.url}</h2>
-        </span>
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
-        <Footer />
-      </>
-    );
-  }
+  return (
+    <>
+      <Header />
+      <span className='home-span'>
+        <h2>Request Method: {requestParams.method}</h2>
+        <h2>URL: {requestParams.url}</h2>
+      </span>
+      <Form handleApiCall={callApi} />
+      <Results data={data} />
+      <Footer />
+    </>
+  );
 }
 
 export default App;
