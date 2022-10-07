@@ -5,8 +5,8 @@ import Header from '../components/Header/index.js';
 import Footer from '../components/Footer/index.js';
 import Results from '../components/Results/index.js';
 import Form from '../components/Form/index.js';
-import { act } from 'react-dom/test-utils';
-import { unmountComponentAtNode } from 'react-dom';
+// import { act } from 'react-dom/test-utils';
+// import { unmountComponentAtNode } from 'react-dom';
 
 // let container = null;
 
