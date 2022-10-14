@@ -8,24 +8,51 @@ html, body {
 
 body {
   background: $backgroundColor;
+  // border: 6px solid black;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   .home-span {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #373B44;
+
+    width: 90%;
+    height: 20px;
+    background: linear-gradient(90deg, rgba(20,38,21,1) 0%, rgba(34,64,33,1) 0%, rgba(185,191,164,0.6867121848739496) 93%);
+
+    border-radius: 20px;
+    // background-color: #373B44;
     color: white;
-    margin-top: 15px;
+    margin: 0px auto;
+    margin: 30px;
     padding: 10px;
+    // width: 50%;
     // border-radius: 10px;
+  }
+
+  .url{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0px auto;
+
+    h4 {
+      padding: 20px;
+    }
   }
 
   #root {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
+    // border: 5px solid red;
   }
 
   footer {

@@ -16,7 +16,8 @@ form {
     background-color: #fff;
     margin-left: 10px;
     border: none;
-    width: 50px;
+    // width: 50px;
+    width: auto;
     border-radius: 10px;
     font-weight: 700;
     &:hover, &.active {
@@ -33,6 +34,10 @@ form {
 
     span {
       margin-right: 10px;
+    }
+    input {
+      // background-color: blue;
+      width: 400px;
     }
     
     &.methods {
