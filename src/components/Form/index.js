@@ -1,32 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './form.scss';
 
 function Form(props) {
 
+  const [method, setMethod ] = useState('');
+  const [url, setUrl ] = useState('');
+  // const [method, setMe ] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const formData = {
-      method: 'GET',
-      url: 'https://pokeapi.co/api/v2/pokemon',
-    };
-    props.handleApiCall(formData);
+      method: method, // set 'GET" method
+      url: url, // set URL path
+    }
+    props.getURLandMethod(formData);
   }
+
+  // set URL once the 'Go' button is clicked
+  const onUrlChange = (event) => {
+    event.preventDefault();
+    // console.log('url: ', event.target.value);
+    setUrl(event.target.value);
+  };
+
+  const onMethodChange = (event) => {
+    event.preventDefault();
+    // console.log('method: ', event.target.value);
+    setMethod(event.target.value);
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label >
           <span id='URL'>URL: </span>
-          <input name='url' type='text' />
+          <input name='url' type='text' onChange={(event) => onUrlChange(event)}/>
           <button type="submit">GO!</button>
         </label>
-        <label className="methods">
-          <span id="get">GET</span>
-          <span id="post">POST</span>
-          <span id="put">PUT</span>
-          <span id="delete">DELETE</span>
-        </label>
+        <span className="methods">
+          <button id="get" onClick={(event) => onMethodChange(event)} value='GET'>GET</button>
+          <button id="post" onClick={(event) => onMethodChange(event)} value='POST'>POST</button>
+          <button id="put" onClick={(event) => onMethodChange(event)} value='PUT'>PUT</button>
+          <button id="delete" onClick={(event) => onMethodChange(event)} value='DELETE'>DELETE</button>
+        </span>
       </form>
     </>
 

@@ -55,3 +55,36 @@ The following user stories detail the major functionality for this phase of the 
 - Both headers and results should be “pretty printed” JSON
 
 ## Lab 29
+
+
+<!-- <h4>
+          DATA: {props.data ? JSON.stringify(props.data.results[0]) : ''}
+        </h4>
+        <h4>
+          MAP ARRAY: {props.data ? JSON.stringify(props.data) : ''}
+        </h4> *
+         <pre>
+           <h4>
+             Count: {props.data ? JSON.stringify(props.data.count, undefined, 2) : null}
+           </h4>
+         </pre>
+         <pre>
+           <h4>
+             Name: {props.data ? JSON.stringify(props.data.results[0].name, undefined, 2) : null}
+           </h4>
+         </pre>
+         <pre>
+           <h4>
+             Name: {props.data ? JSON.stringify(props.data.results[1].name, undefined, 2) : null}
+           </h4>
+         </pre>
+         <pre>
+           <h4>
+             Url: {props.data ? JSON.stringify(props.data.results[0].url, undefined, 2) : null}
+           </h4>
+         </pre>
+         <pre>
+           <h4>
+             Url: {props.data ? JSON.stringify(props.data.results[1].url, undefined, 2) : null}
+           </h4>
+         </pre> -->

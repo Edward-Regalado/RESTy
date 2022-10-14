@@ -3,9 +3,17 @@ import './results.scss'
 
 function Results(props) {
   return (
-    <>
-      <section>
-        <pre>
+    <div className='container'>
+      <section className='form-section'>
+        <h4>
+          {props.data ? props.data.map(x => 
+            <h3>{x.name} {x.url}</h3>
+            ) : []}
+        </h4>
+        {/* <h4>
+          MAP ARRAY: {props.data ? JSON.stringify(props.data) : ''}
+        </h4> */}
+        {/* <pre>
           <h4>
             Count: {props.data ? JSON.stringify(props.data.count, undefined, 2) : null}
           </h4>
@@ -29,9 +37,9 @@ function Results(props) {
           <h4>
             Url: {props.data ? JSON.stringify(props.data.results[1].url, undefined, 2) : null}
           </h4>
-        </pre>
+        </pre> */}
       </section>
-    </>
+    </div>
   )
 }
 
