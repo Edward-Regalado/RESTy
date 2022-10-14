@@ -21,13 +21,11 @@ function Form(props) {
   // set URL once the 'Go' button is clicked
   const onUrlChange = (event) => {
     event.preventDefault();
-    // console.log('url: ', event.target.value);
     setUrl(event.target.value);
   };
 
   const onMethodChange = (event) => {
     event.preventDefault();
-    // console.log('method: ', event.target.value);
     setMethod(event.target.value);
   };
 

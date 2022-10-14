@@ -10,7 +10,7 @@ import axios from 'axios';
 
 function App(){
 
-const [data, setData] = useState([]); // gets returned in the from
+const [data, setData] = useState(null); // gets returned in the from
 const [requestParams, setRequestParams] = useState({});
 
  const callApi = (incomingObjectOnForm) => {
@@ -23,10 +23,10 @@ useEffect(() => {
 
     if(requestParams.method === 'GET') {
       await axios.get(requestParams.url).then((res) => {
-        setData(res.data.results);
-        console.log('DATA: ', res.data.results);
+        setData(res);
         console.log('RES: ', res);
-      }); 
+        // console.log('DATA: ', JSON.stringify(data));
+      }).catch((err) => console.log('ERROR: ', err)); 
     }
 
     if(requestParams.method === 'POST') {
@@ -59,21 +59,14 @@ useEffect(() => {
     <>
       <Header />
       <span className='home-span'>
-        <h2>Request Method: {requestParams.method}</h2>
-        <h2>URL: {requestParams.url}</h2>
-        {/* <h2>Results: {results}</h2> */}
+        <div className='url'>
+          <h4>Method: {requestParams.method}</h4>
+          <h4>URL: {requestParams.url}</h4>
+        </div>
       </span>
       <Form getURLandMethod={callApi} />
       <Results data={data} />
       <Footer />
-      {/* <Header />
-      <span className='home-span'>
-        <h2>Request Method: {requestParams.method}</h2>
-        <h2>URL: {requestParams.url}</h2>
-      </span>
-      <Form handleApiCall={callApi} />
-      <Results data={data} />
-      <Footer /> */}
     </>
   );
 }
