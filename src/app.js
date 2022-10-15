@@ -20,7 +20,7 @@ const [requestParams, setRequestParams] = useState({});
 useEffect(() => {
   async function fetchData() {
     console.log('USE EFFECT WAS CALLED');
-
+    console.log('REQUEST PARAMETERS', requestParams);
     if(requestParams.method === 'GET') {
       await axios.get(requestParams.url).then((res) => {
         setData(res);
@@ -30,10 +30,11 @@ useEffect(() => {
     }
 
     if(requestParams.method === 'POST') {
-      await axios.post(requestParams.url).then((res) => {
-        console.log('POST method was passed');
+      await axios.post(requestParams.url, requestParams.body).then((res) => {
+        setData(res);
+        console.log('POST RES', res);
         console.log('METHOD: ', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
     
     if(requestParams.method === 'PUT') {
@@ -53,18 +54,25 @@ useEffect(() => {
   }
   fetchData();
   }, [requestParams]);
+
+  // const saved = localStorage.getItem('history');
+  // const initialValue = JSON.parse(saved);
+  // console.log('initialValue: ', initialValue);
   
 
   return (
     <>
       <Header />
+      {/* {initialValue ? initialValue.map((x, key) => {
+        return <h4 key={key}>{x}</h4>}
+        ) : undefined} */}
       <span className='home-span'>
         <div className='url'>
           <h4>Method: {requestParams.method}</h4>
           <h4>URL: {requestParams.url}</h4>
         </div>
       </span>
-      <Form getURLandMethod={callApi} />
+      <Form handleRequestParams={callApi} />
       <Results data={data} />
       <Footer />
     </>
@@ -72,26 +80,3 @@ useEffect(() => {
 }
 
 export default App;
-
-
-
-
-
-
-
-  // useEffect(async () => {
-  //   const response = await fetch('https://api.rendomuser.me/');
-  //   const data = await response.json(); 
-  // }, []);
-
-  // useEffect(() => {
-  //   const getData = async() => {
-  //     const data = {
-  //       method: method,
-  //       url: url,
-  //       body: JSON.stringify({data: 'value'})
-  //     }
-
-  //   }
-  //   getData();
-  // }, []);

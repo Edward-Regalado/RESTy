@@ -8,7 +8,7 @@ function Results(props) {
       <section className='form-section'>
         <pre>
           <h4>
-            {props.data ? JSON.stringify(props.data, undefined, 2) : "Please enter an API in the input box!"}
+            {props.data ? JSON.stringify(props.data, undefined, 2) : "Please enter an API in the URL box, select a request method and hit Go!"}
           </h4>
         </pre>
       </section>
