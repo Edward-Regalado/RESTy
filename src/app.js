@@ -13,19 +13,21 @@ function App(){
 const [data, setData] = useState(null); // gets returned in the from
 const [requestParams, setRequestParams] = useState({});
 
- const callApi = (incomingObjectOnForm) => {
-    setRequestParams(incomingObjectOnForm);
+// this function receives the form data from the form component and sets our requestParams object
+const callApi = (incomingObjectOnForm) => {
+  setRequestParams(incomingObjectOnForm);
   }
 
+
+// use effect hook runs every time its dependency list changes
 useEffect(() => {
   async function fetchData() {
-    console.log('USE EFFECT WAS CALLED');
     console.log('REQUEST PARAMETERS', requestParams);
+
     if(requestParams.method === 'GET') {
       await axios.get(requestParams.url).then((res) => {
         setData(res);
         console.log('RES: ', res);
-        // console.log('DATA: ', JSON.stringify(data));
       }).catch((err) => console.log('ERROR: ', err)); 
     }
 
@@ -41,31 +43,24 @@ useEffect(() => {
       await axios.put(requestParams.url).then((res) => {
         console.log('PUT method was passed');
         console.log('METHOD: ', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
     
     if(requestParams.method === 'DELETE') {
       await axios.delete(requestParams.url).then((res) => {
         console.log('DELETE method was passed');
         console.log('METHOD', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
 
   }
+  // fetchData gets called when useEffect gets called
   fetchData();
-  }, [requestParams]);
-
-  // const saved = localStorage.getItem('history');
-  // const initialValue = JSON.parse(saved);
-  // console.log('initialValue: ', initialValue);
-  
+  }, [requestParams]);  
 
   return (
     <>
       <Header />
-      {/* {initialValue ? initialValue.map((x, key) => {
-        return <h4 key={key}>{x}</h4>}
-        ) : undefined} */}
       <span className='home-span'>
         <div className='url'>
           <h4>Method: {requestParams.method}</h4>

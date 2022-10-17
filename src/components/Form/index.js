@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 import './form.scss';
 
@@ -23,6 +22,7 @@ function Form(props) {
       //   'Content-Type': 'application/json'
       // }
     }
+
     if(url != null){
       history.push(url);
       console.log('history url pushed: ', history);
@@ -30,6 +30,7 @@ function Form(props) {
       localStorage.setItem('history', item);
     }
 
+    // call our callApi function and pass formData - remember the alias 
     props.handleRequestParams(formData);
   }
 
@@ -55,14 +56,21 @@ function Form(props) {
   }
 
   const onClear = (event) => {
+    event.preventDefault();
     console.log('clear history');
+    history = [];
+    document.getElementById('urlInput').value = '';
+    setBody(null);
+    setUrl('');
+    setMethod('');
+    localStorage.clear();
+
   };
 
   const getHistory = (event) => {
     
     const saved = localStorage.getItem('history');
     const initialValue = JSON.parse(saved);
-    // console.log('initialValue: ', initialValue);
     
     let select = document.getElementById('getHistory');
 
@@ -81,7 +89,7 @@ function Form(props) {
       <form onSubmit={handleSubmit}>
         <label >
           <span id='URL'>URL: </span>
-          <input name='url' type='text' onChange={(event) => onUrlChange(event)}/>
+          <input id='urlInput' name='url' type='text' onChange={(event) => onUrlChange(event)}/>
           <button type="submit">GO!</button>
         </label>
         <span className="methods">
@@ -89,7 +97,7 @@ function Form(props) {
           <button id="post" onClick={(event) => onMethodChange(event)} value='POST'>POST</button>
           <button id="put" onClick={(event) => onMethodChange(event)} value='PUT'>PUT</button>
           <button id="delete" onClick={(event) => onMethodChange(event)} value='DELETE'>DELETE</button>
-          <button id="clear" onClick={(event) => onClear(event)} value='DELETE'>Clear</button>
+          <button id="clear" onClick={(event) => onClear(event)} >Clear</button>
         </span>
       <div className='text-container'>
         {method === 'POST' ? 
