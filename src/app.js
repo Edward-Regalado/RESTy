@@ -13,47 +13,50 @@ function App(){
 const [data, setData] = useState(null); // gets returned in the from
 const [requestParams, setRequestParams] = useState({});
 
- const callApi = (incomingObjectOnForm) => {
-    setRequestParams(incomingObjectOnForm);
+// this function receives the form data from the form component and sets our requestParams object
+const callApi = (incomingObjectOnForm) => {
+  setRequestParams(incomingObjectOnForm);
   }
 
+
+// use effect hook runs every time its dependency list changes
 useEffect(() => {
   async function fetchData() {
-    console.log('USE EFFECT WAS CALLED');
+    console.log('REQUEST PARAMETERS', requestParams);
 
     if(requestParams.method === 'GET') {
       await axios.get(requestParams.url).then((res) => {
         setData(res);
         console.log('RES: ', res);
-        // console.log('DATA: ', JSON.stringify(data));
       }).catch((err) => console.log('ERROR: ', err)); 
     }
 
     if(requestParams.method === 'POST') {
-      await axios.post(requestParams.url).then((res) => {
-        console.log('POST method was passed');
+      await axios.post(requestParams.url, requestParams.body).then((res) => {
+        setData(res);
+        console.log('POST RES', res);
         console.log('METHOD: ', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
     
     if(requestParams.method === 'PUT') {
       await axios.put(requestParams.url).then((res) => {
         console.log('PUT method was passed');
         console.log('METHOD: ', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
     
     if(requestParams.method === 'DELETE') {
       await axios.delete(requestParams.url).then((res) => {
         console.log('DELETE method was passed');
         console.log('METHOD', requestParams.method);
-      });
+      }).catch((err) => console.log('ERROR: ', err));
     }
 
   }
+  // fetchData gets called when useEffect gets called
   fetchData();
-  }, [requestParams]);
-  
+  }, [requestParams]);  
 
   return (
     <>
@@ -64,7 +67,7 @@ useEffect(() => {
           <h4>URL: {requestParams.url}</h4>
         </div>
       </span>
-      <Form getURLandMethod={callApi} />
+      <Form handleRequestParams={callApi} />
       <Results data={data} />
       <Footer />
     </>
@@ -72,26 +75,3 @@ useEffect(() => {
 }
 
 export default App;
-
-
-
-
-
-
-
-  // useEffect(async () => {
-  //   const response = await fetch('https://api.rendomuser.me/');
-  //   const data = await response.json(); 
-  // }, []);
-
-  // useEffect(() => {
-  //   const getData = async() => {
-  //     const data = {
-  //       method: method,
-  //       url: url,
-  //       body: JSON.stringify({data: 'value'})
-  //     }
-
-  //   }
-  //   getData();
-  // }, []);
